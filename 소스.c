@@ -4,144 +4,92 @@
 
 int main(void)
 {
-	//While문 공부
-	//Q:7-1-1 : 사용자에게 양의정수 1개를 입력받게 한 후 그 수만큼 Hello World! 출력
-	int num1, i, sum, num2, j;
-	double avg;
-	printf("숫자 입력 : ");
+	//Q : 8-1-1: 1~100사이에서 7의배수 또는 9의 배수 출력
+	int i, j, num1, num2, num3;
+	double result;
+	for (i = 1; i <= 100; i++)
+	{
+		if (i % 7 == 0 && i % 9 == 0)
+			printf("7과 9의 배수 : %d\n", i);
+		else if (i % 7 == 0)
+			printf("7의 배수 : %d\n", i);
+		else if (i % 9 == 0)
+			printf("9의 배수 : %d\n", i);
+	}
+	//Q : 8-1-2 : 두 개의 정수를 입력 받아서 두 수의 차를 출력
+	printf("두 수를 입력하세요 : ");
+	scanf("%d %d", &num1, &num2);
+	printf("두 수의 차 : %d\n", num1 > num2 ? num1 - num2 : num2 - num1);
+	//Q : 8-1-3 : 3개의 점수를 입력받은 뒤 평균이 90,80,70,60,50,50미만으로 성적을 구분지어 출력
+	printf("국어 점수 입력 : ");
 	scanf("%d", &num1);
-	i = 0;
-	while (i < num1)
+	printf("수학 점수 입력 : ");
+	scanf("%d", &num2);
+	printf("영어 점수 입력 : ");
+	scanf("%d", &num3);
+	
+	result = (num1 + num2 + num3) / 3.0; 
+	if (result >= 90)
+		printf("A\n");
+	else if (result >= 80)
+		printf("B\n");
+	else if (result >= 70)
+		printf("C\n");
+	else if (result >= 60)
+		printf("D\n");
+	else if (result >= 50)
+		printf("E\n");
+	else
+		printf("F\n");
+	//Q : 8-1-4 : 8-1-3문제를 조건 연산자로 해결
+	printf("%c\n", result >= 90 ? 'A' : result >= 80 ? 'B' : result >= 70 ? 'C' : result >= 60 ? 'D' : result >= 50 ? 'E' : 'F');
+
+	//Q : 8-2-1 : 구구단 2단,4단,6단,8단만 출력 2단은 2*2까지 4단은 4*4까지 이런식으로, 최대한 break,continue 사용 -> 억지로 해봄
+	for (i = 1; i <= 9; i ++)
 	{
-		printf("Hello World!\n");
-		i++;
-	}
-	//Q:7-1-2 : 사용자로 부터 양의 정수를 하나 입력 받은 다음,그 수만큼 3의 배수 출력
-	printf("숫자 입력 : ");
-	scanf("%d", &num1);
-	i = 1;
-	while (i <= num1)
-	{
-		printf("%d ", i * 3);
-		i++;
-	}
-	printf("\n");
-	//Q:7-1-3 : 사용자가 0을 입력하기 전까지 입력한 수 모두 더하기
-	sum = 0;
-	printf("정수 입력(0을 입력하면 이때까지 입력한 수를 더한값 출력) : ");
-	scanf("%d", &num1);
-	while (num1 != 0)
-	{
-		sum += num1;
-		printf("정수 입력(0을 입력하면 이때까지 입력한 수를 더한값 출력) : ");
-		scanf("%d", &num1);
-	}
-	printf("%d\n", sum);
-	// 2번째 방식
-	/*
-	sum = 0;
-	num = 1;
-	while(num != 0)
-	{
-		printf("정수 입력(0을 입력하면 이때까지 입력한 수를 더한값 출력) : ");
-		scanf("%d", &num1);
-		sum += num1;
-	}
-	printf("%d\n", sum);
-	*/
-	//Q:7-1-4 : 입력받은 숫자에 해당하는 구구단을 역순으로 출력
-	printf("몇단? : ");
-	scanf("%d", &num1);
-	i = 9;
-	while (i != 0)
-	{
-		printf("%d * %d = %d\n", num1, i, num1 * i);
-		i--;
-	}
-	//Q:7-1-5 : 사용자로 부터 입력받은 정수의 평균을 출력하는 프로그램 1.몇개 입력받을지 사용자에게, 2. 평균값은 소수점 이하까지 계산
-	printf("몇개의 숫자를 입력할꺼임? : ");
-	scanf("%d", &num1);
-	i = 0;
-	sum = 0;
-	while (i < num1)
-	{
-		printf("정수 입력 : ");
-		scanf("%d", &num2);
-		sum += num2;
-		i++;
-	}
-	avg = (double)sum / num1;
-	printf("평균 : %f\n", avg);
-	//Q : 7-2-1 : 사용자로부터 5개의 정수를 입력받아서 그수의 합을 구해야함. 단 , 정수는 반드시 1이상이여야 하며, 아니면 다시 요구
-	i = 0;
-	sum = 0;
-	while (i < 5)
-	{
-		printf("1이상의 정수 입력 : ");
-		scanf("%d", &num1);
-		while (num1 < 1)
-		{
-			printf("1이상의 정수가 아님\n");
-			printf("다시 1이상의 정수 입력 : ");
-			scanf("%d", &num1);
-		}
-		sum += num1;
-		i++;
-	}
-	printf("%d\n", sum);
-	//Q : 7-2-2 : 그림 찍기
-	i = 0;
-	j = 0;
-	while (i < 5)
-	{
-		while (j < i)
-		{
-			printf("o");
-			j++;
-		}
-		printf("*\n");
-		i++;
-		j = 0;
-	}
-	//Q :7-3-2 : 0이상 100이하의 짝수 합 출력
-	sum = 0;
-	i = 0;
-	do
-	{
-		i += 2;
-		sum += i;
-	} while (i < 100);
-	printf("%d\n", sum);
-	//Q : 7-3-3 : 구구단 2단 부터 9단까지 출력 do~while 문으로
-	i = 2;
-	j = 1;
-	do
-	{
-		do
+		if (i % 2 != 0)
+			continue;
+		for (j = 1; j < 9; j++)
 		{
 			printf("%d * %d = %d\n", i, j, i * j);
-			j++;
-		} while (j <= 9);
-		i++;
-		j = 1;
-	} while (i <= 9);
-	// Q : 7-4-1 : 두개의 정수사이의 합을 구하기
-	printf("두 정수를 입력하세요. : ");
-	scanf("%d %d", &num1, &num2);
-	sum = 0;
-	for (i = num1; i <= num2; i++)
-	{
-		sum += i;
+			if (i == j)
+				break;
+		}
 	}
-	printf("더한 값 : %d\n", sum);
-	//Q : 7-4-2 : 팩토리얼 계산
-	printf("팩토리얼을 구할 정수를 입력하세요 : ");
-	scanf("%d", &num1);
-	sum = 1;
-	for (i = num1; i >= 1; i--)
-		sum *= i;
-	printf("팩토리얼 : %d\n", sum);
+	
+	// Q : 8-2-2 : AZ + ZA가 99인 모든 A,Z를 구하시오 AZ는 곱이 아니라 10의 자리수인 A, 일의자리인 Z임. -> 이 예제는 굳이 continue를 왜쓰는지 모르겠음.
 
+	for (i = 0; i <= 9; i++)
+	{
+		for (j = 0; j <= 9; j++)
+		{
+			if (i + j == 9)
+				printf("(%d,%d)\n", i, j);
+		}
+	}
+	//Q : 8-3-1 : 입력받은 값의 범위를 알려주는 프로그램. -> num1 / 10으로 분기를 나눌수 있었음. 그래도 이런것은 else if 쓸듯.
+	printf("정수 입력 : ");
+	scanf("%d", &num1);
+	num2 = num1 < 0 ? 0 : num1 < 10 ? 1 : num1 < 20 ? 2 : num1 < 30 ? 3 : 4;
+	switch (num2)
+	{
+	case 0:
+		printf("0미만\n");
+		break;
+	case 1:
+		printf("0이상 10 미만\n");
+		break;
+	case 2:
+		printf("10이상 20미만\n");
+		break;
+	case 3:
+		printf("20이상 30미만\n");
+		break;
+	case 4:
+		printf("30이상\n");
+		break;
+	}
+	
 	return 0;
 
 }
