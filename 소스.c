@@ -1,95 +1,106 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 
+int Max_number(int, int, int);
+int Min_number(int, int, int); 
+double CelToFah(double);
+double FahToCel(double);
+int AddTotal(int);
+void Fibonacci(int);
 
 int main(void)
 {
-	//Q : 8-1-1: 1~100사이에서 7의배수 또는 9의 배수 출력
-	int i, j, num1, num2, num3;
-	double result;
-	for (i = 1; i <= 100; i++)
+	//Q : 9-1-1 : 세개의 인자를 받아서 가장큰값과 가장 작은값을 반환하는 함수 작성.
+	int num1, num2, num3, i;
+	double num4;
+	printf("세개의 수를 입력 : ");
+	scanf("%d %d %d", &num1, &num2, &num3);
+	printf("가장 큰 값 : %d  가장 작은 값 : %d\n", Max_number(num1, num2, num3), Min_number(num1, num2, num3));
+	//Q : 9-1-2 : 섭씨 -> 화씨, 화씨 -> 섭씨로 바꾸어주는 2개의 함수 작성
+	while (1)
 	{
-		if (i % 7 == 0 && i % 9 == 0)
-			printf("7과 9의 배수 : %d\n", i);
-		else if (i % 7 == 0)
-			printf("7의 배수 : %d\n", i);
-		else if (i % 9 == 0)
-			printf("9의 배수 : %d\n", i);
-	}
-	//Q : 8-1-2 : 두 개의 정수를 입력 받아서 두 수의 차를 출력
-	printf("두 수를 입력하세요 : ");
-	scanf("%d %d", &num1, &num2);
-	printf("두 수의 차 : %d\n", num1 > num2 ? num1 - num2 : num2 - num1);
-	//Q : 8-1-3 : 3개의 점수를 입력받은 뒤 평균이 90,80,70,60,50,50미만으로 성적을 구분지어 출력
-	printf("국어 점수 입력 : ");
-	scanf("%d", &num1);
-	printf("수학 점수 입력 : ");
-	scanf("%d", &num2);
-	printf("영어 점수 입력 : ");
-	scanf("%d", &num3);
-	
-	result = (num1 + num2 + num3) / 3.0; 
-	if (result >= 90)
-		printf("A\n");
-	else if (result >= 80)
-		printf("B\n");
-	else if (result >= 70)
-		printf("C\n");
-	else if (result >= 60)
-		printf("D\n");
-	else if (result >= 50)
-		printf("E\n");
-	else
-		printf("F\n");
-	//Q : 8-1-4 : 8-1-3문제를 조건 연산자로 해결
-	printf("%c\n", result >= 90 ? 'A' : result >= 80 ? 'B' : result >= 70 ? 'C' : result >= 60 ? 'D' : result >= 50 ? 'E' : 'F');
-
-	//Q : 8-2-1 : 구구단 2단,4단,6단,8단만 출력 2단은 2*2까지 4단은 4*4까지 이런식으로, 최대한 break,continue 사용 -> 억지로 해봄
-	for (i = 1; i <= 9; i ++)
-	{
-		if (i % 2 != 0)
-			continue;
-		for (j = 1; j < 9; j++)
+		printf("Fah - 1 , Cel - 2 : ");
+		scanf("%d", &num1);
+		if (num1 == 1)
 		{
-			printf("%d * %d = %d\n", i, j, i * j);
-			if (i == j)
-				break;
+			printf("Fah : ");
+			scanf("%lf", &num4);
+			printf("Cel : %f\n", FahToCel(num4));
+			break;
 		}
-	}
-	
-	// Q : 8-2-2 : AZ + ZA가 99인 모든 A,Z를 구하시오 AZ는 곱이 아니라 10의 자리수인 A, 일의자리인 Z임. -> 이 예제는 굳이 continue를 왜쓰는지 모르겠음.
-
-	for (i = 0; i <= 9; i++)
-	{
-		for (j = 0; j <= 9; j++)
+		else if (num1 == 2)
 		{
-			if (i + j == 9)
-				printf("(%d,%d)\n", i, j);
+			printf("Cel : ");
+			scanf("%lf", &num4);
+			printf("Fah : %f\n", CelToFah(num4));
+			break;
 		}
+		else
+			printf("not 1 or 2 , ");
 	}
-	//Q : 8-3-1 : 입력받은 값의 범위를 알려주는 프로그램. -> num1 / 10으로 분기를 나눌수 있었음. 그래도 이런것은 else if 쓸듯.
-	printf("정수 입력 : ");
+	//Q : 9-1-3 : 인자로 전달된 수만큼 피보나치 수열 출력
+	printf("몇번째 까지 출력 ? : ");
 	scanf("%d", &num1);
-	num2 = num1 < 0 ? 0 : num1 < 10 ? 1 : num1 < 20 ? 2 : num1 < 30 ? 3 : 4;
-	switch (num2)
+	if (num1 < 1)
 	{
-	case 0:
-		printf("0미만\n");
-		break;
-	case 1:
-		printf("0이상 10 미만\n");
-		break;
-	case 2:
-		printf("10이상 20미만\n");
-		break;
-	case 3:
-		printf("20이상 30미만\n");
-		break;
-	case 4:
-		printf("30이상\n");
-		break;
+		printf("1이상의 수를 입력하세요.\n");
+		return -1;
 	}
-	
+	Fibonacci(num1);
+	printf("\n");
+	//Q : 9-2-1 : 사용자가 입력하는 값을 누적하여 합계를 출력하는 프로그램을 static 변수로 대체하여 프로그램 짜보기
+	for (i = 0; i < 3; i++)
+	{
+		printf("입력 : ");
+		scanf("%d", &num1);
+		printf("누적 : %d \n", AddTotal(num1));
+	}
 	return 0;
 
+}
+
+int Max_number(int num1, int num2, int num3)
+{
+	return num1 > num2 ? num1 > num3 ? num1 : num3 : num2 > num3 ? num2 : num3;
+}
+
+int Min_number(int num1, int num2, int num3)
+{
+	return num1 < num2 ? num1 < num3 ? num1 : num3 : num2 < num3 ? num2 : num3;
+}
+
+double CelToFah(double Cel)
+{
+	return 1.8 * Cel + 32;
+}
+
+double FahToCel(double Fah)
+{
+	return (Fah - 32) / 1.8;
+}
+
+void Fibonacci(int num)
+{
+	int i, a = 0, b = 1, box;
+	if (num == 1)
+		printf("0\n");
+	else
+	{
+		printf("0 1 ");
+		for (i = 2; i < num; i++)
+		{
+			printf("%d ", a + b);
+			box = a + b;
+			a = b;
+			b = box;
+		}
+	}
+	
+}
+
+int AddTotal(int num)
+{
+	static int total;
+	total += num;
+	return total;
 }
