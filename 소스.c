@@ -1,125 +1,62 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int gcd(int, int);
-double square_2(int, double);
-
-
-int main(void)
+int main()
 {
-	//Q : 10-1 :10진수 정수를 입력받아서 16진수 출력하기
-	int num1, num2, num3, box, i, j, k;
-	double num;
-	printf("정수 입력 : ");
-	scanf("%d", &num1);
-	printf("%X\n", num1);
-	//Q : 10-2 : 사용자가 2개의 정수를 입력하면 그 사이에있는 모든 구구단 출력
-	printf("정수 2개 입력 : ");
-	scanf("%d %d", &num1, &num2);
-	if (num1 > num2)
+	//Q : 11-1-1 : 정수 5개 입력받아서 최대, 최소, 모든 합을 구하시오. (단, 모든입력을 마친후에 최대,최소, 총합 계산)
+	int arr[5];
+	int i, j, sum, max, min;
+	char arr2[10] = { 'G','o','o','d',' ','T','i','m','e' };
+	char arr3[50];
+	char box;
+	printf("5개의 정수 입력\n");
+	for (i = 0; i < 5; i++)
+		scanf("%d", &arr[i]);
+	max = arr[0], min = arr[0], sum = arr[0];
+	for (i = 1; i < 5; i++)
 	{
-		box = num1;
-		num1 = num2;
-		num2 = box;
+		sum += arr[i];
+		if (arr[i] > max)
+			max = arr[i];
+		else if (arr[i] < min)
+			min = arr[i];
 	}
-	for (i = num1; i <= num2; i++)
-	{
-		printf("%d단 출력 \n", i);
-		for (j = 1; j <= 9; j++)
-			printf("%d * %d = %d\n", i, j, i * j);
-	}
-	//Q : 10-3 : 두개의 정수를 입력바다엇 최대 공약수 구하기.
-	printf("2개의 정수 입력 : ");
-	scanf(" %d %d", &num1, &num2);
-	if (num1 > num2)
-	{
-		box = num1;
-		num1 = num2;
-		num2 = box;
-	}
-	for (i = 1; i <= num2; i++)
-		if (num1 % i == 0 && num2 % i == 0)
-			box = i;
-	printf("두 수의 최대 공약수 : %d\n", box);
-	//유클리드 호제법 : a = b*q + r , 0<= r < b 일때 a,b의 최대 공약수는 b,r의 최대 공약수와 같다. -> r = 0이면 b가 최대 공약수이다.
-	//이를 이용해보자
-	printf("두 수의 최대공약수 : %d\n", gcd(num2, num1));
-
-	//Q : 10-4 : 3500원 보유중, 크림빵 : 500원, 새우깡 : 700원, 콜라 : 400원 각각 1개이상을 사려고 할때 모든 경우 출력
-	printf("현재 당신이 소유하고 있는 금액 : 3500\n");
-	//1900
-	for (i = 1; i <= 4; i++)
-	{
-		for (j = 1; j <= 3; j++)
-		{
-			for (k = 1; k <= 5; k++)
-			{
-				if (i * 500 + j * 700 + k * 400 <= 3500)
-					printf("크림빵: %d 새우깡 : %d 콜라 : %d\n",i,j,k);
-			}
-		}
-	}
-	printf("어떻게 구입하시겠습니까? \n");
-	//Q : 10-5 : 10개의 소수를 출력하는 프로그램
-	num1 = 0;
-	for (i = 2; ; i++)
-	{
-		box = 1;
-		for (j = 2; j <= i; j++)
-			if (i % j == 0)
-				box++;
-		if (box == 2)
-		{
-			printf("%d ", i);
-			num1++;
-		}
-		if (num1 == 10)
-			break;
-	}
+	printf("최댓값 : %d, 최솟값 : %d, 정수의 총 합 : %d\n", max, min, sum);
+	//Q : 11-1-2 : 1차원 배열로 "Good time" 저장 후 저장된 내용 출력하기(단, 아직 문자열 저장방식을 안배웠단 전제)
+	for (i = 0; i < 9; i++)
+		printf("%c", arr2[i]);
 	printf("\n");
-	//Q : 10-6 : 사용자로부터 초를 입력받은 후 이를 시, 분, 초로 나타내기
-	printf("초 입력 :");
-	scanf("%d", &num1); //?
-	scanf("%d", &num1);
-	printf("h:%d m:%d s:%d \n", num1 / 3600, (num1 % 3600) / 60, (num1 % 3600) % 60); 
-	//Q : 10-7 : 숫자 n을 입력받아서 2^k <= n이 성립하는 k의 최댓값 구하기.
-	printf("정수 입력 : ");
-	scanf("%d", &num1);
-	for (i = 0; ; i++)
-	{
-		num2 = 1;
-		for (j = 0; j < i; j++)
-		{
-			num2 *= 2;
-		}
-		if (num1 / num2 == 0)
+	//Q : 11-2-1 : 사용자로 부터 하나의 영단어를 입력받아서 입력받은 영단어의 길이를 계산하여 출력
+	printf("영단어 하나 입력 : ");
+	scanf("%s", arr3);
+	for (i = 0;; i++)
+		if (arr3[i] == '\0')
 			break;
+	printf("문자열 길이 : %d\n", i);
+	//Q : 11-2-2 : 사용자로부터 영단어를 입력받아서 저장, 그 후 단어를 역순으로 뒤집음, 그 후 출력
+	printf("영단어 하나 입력 : ");
+	scanf("%s", arr3);
+	for (i = 0;; i++)
+		if (arr3[i] == '\0')
+			break;
+	for (j = 0; j < i / 2; j++)
+	{
+		box = arr3[j];
+		arr3[j] = arr3[i - 1 - j];
+		arr3[i - j - 1] = box;
 	}
-	printf("공식을 만족하는 k의 최댓값은 : %d\n", i - 1);
-	//Q : 10-8 : 2의 n승을 구하는 함수를 재귀함수로 만들기
-	printf("정수 입력 : ");
-	scanf("%d", &num1);
-	printf("2의 %d승은 %f 입니다.\n",num1,square_2(num1,1.0));
+	printf("%s\n", arr3);
+	//Q : 11-2-3 : 영단어 하나 입력받아서 아스키 코드값이 가장 큰 것을 출력
+	printf("영단어 하나 입력 : ");
+	scanf("%s", arr3);
+	for (i = 0,box = 0;; i++)
+	{
+		if (arr3[i] == 0)
+			break;
+		if (arr3[i] > box)
+			box = arr3[i];
+	}
+	printf("%c\n", box);
 
 	return 0;
-}
-
-int gcd(int num1, int num2)
-{
-	int r = num1 % num2;
-	if (r == 0)
-		return num2;
-	else
-		return gcd(num2, r);
-}
-
-double square_2(int num, double a)
-{
-	if (num == 0)
-		return a;
-	else if (num > 0)
-		return square_2(num - 1, a * 2);
-	else
-		return square_2(num + 1, a / 2);
-
 }
