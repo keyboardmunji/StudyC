@@ -1,56 +1,43 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
+int SquareByValue(int);
+void SquareByReference(int*);
+void Swap3(int*, int*, int*);
+
 int main()
 {
-	//Q : 13-1-1 : 배열길이가 5인 배열을 초기화 하고 포인터를 이용하여 각 값에 2를 더해보자.
-	int arr[5] = { 1,2,3,4,5 };
-	int arr2[6] = { 1,2,3,4,5,6 };
-	int* ptr1 = arr;
-	int* ptr2 = arr2;
-	int* ptr3 = arr2 + 5;
-	int i, sum = 0;
-	printf("변경 전 : ");
-	for (i = 0; i < 5; i++)
-		printf("%d ",arr[i]);
-	printf("\n");
-	for (i = 0; i < 5; i++)
-		*(ptr1++) += 2;
-	printf("변경 후 : ");
-	for (i = 0; i < 5; i++)
-		printf("%d ", *(arr+i)); // 다른식으로 접근해봄
-	printf("\n\n");
-	//Q : 13-1-2 : 1번 문제에서 배열 접근 방식을 덧셈으로 변경 -> ptr1을 바꾸지 말고
-	ptr1 = arr;
-	printf("변경 전 : ");
-	for (i = 0; i < 5; i++)
-		printf("%d ", arr[i]);
-	printf("\n");
-	for (i = 0; i < 5; i++)
-		*(ptr1+i) += 2;
-	printf("변경 후 : ");
-	for (i = 0; i < 5; i++)
-		printf("%d ", *(arr + i)); // 다른식으로 접근해봄
-	printf("\n");
-	//Q : 13-1-3 : 마지막 주소값을 받은 후 이름 감소 연산으로 모든 배열요소의 합 구하기.
-	ptr1 = arr + 4;
-	for (i = 0; i < 5; i++)
-		sum += *(ptr1--);
-	printf("총 합 : %d\n", sum);
-	//Q : 13-1-4 : 배열길이가 6인 배열에 미리 초기화한 값을 포인터 변수 2개를 활용하여 반전시키기.
-	printf("변경 전 : ");
-	for (i = 0; i < 6; i++)
-		printf("%d ", arr2[i]);
-	printf("\n");
-	for (i = 0; i < 3; i++)
-	{
-		sum = *(ptr2 + i);
-		*(ptr2 + i) = *(ptr3 - i);
-		*(ptr3 - i) = sum;
-	}
-	printf("변경 후 : ");
-	for (i = 0; i < 6; i++)
-		printf("%d ", arr2[i]);
-	printf("\n"); 
+	//Q :14-1-1: 2가지 방식으로 제곱을 계산하는 함수 작성
+	int num, num1, num2, num3;
+	printf("정수 한개 입력 : ");
+	scanf("%d", &num);
+	printf("제곱 값 : %d\n", SquareByValue(num));
+	SquareByReference(&num);
+	printf("제곱 값 : %d\n", num);
+	//Q :14-1-2: 세 변수에 저장된 값을 서로 뒤바꾸는 함수 by pointer num1 -> num2, num2 -> num3, num3 -> num1
+	printf("세 개의 정수 입력 : ");
+	scanf("%d %d %d", &num1, &num2, &num3);
+	Swap3(&num1, &num2, &num3);
+	printf("%d %d %d\n", num1, num2, num3);
+	
 	return 0;
+}
+
+int SquareByValue(int num1)
+{
+	return num1 * num1;
+}
+
+void SquareByReference(int* ptr1)
+{
+	*ptr1 *= *ptr1;
+}
+
+void Swap3(int* num1, int* num2, int* num3)
+{
+	int box;
+	box = *num1;
+	*num1 = *num3;
+	*num3 = *num2;
+	*num2 = box;
 }
